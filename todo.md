@@ -40,17 +40,22 @@ Your outline is solid — incrementally building an agent and using Git comm
    • Refactor your chat loop to inspect the LLM’s JSON response for `{“tool”:..., “arg”:...}` calls, dispatch through the registry, then feed tool output back into the chat loop  
    • Commit “v0.2: add tool framework”
 
-4. Step 3: Semantic‐search tool (v0.4)
-   • Add dependencies: `sentence-transformers`, `faiss-cpu` (or use OpenAI Embeddings + simple cosine)  
+4. Step 3: Semantic‐search tool (v0.3)
+   • use OpenAI Embeddings + simple cosine
    • Under `tools/semantic_search.py`, build:
      1. An indexing script that walks a directory, embeds each file/chunk, and stores vectors  
      2. A `SemanticSearchTool` that embeds the query, retrieves top-k matches, and returns them  
-   • Register this tool in your registry  
-   • Show an example query (“semantic_search:‘how do I initialize the agent?’”)  
-   • Commit “v0.4: add semantic_search tool”
+   • Register this tool in your registry
+   • Show an example query (“semantic_search:‘how do I initialize the agent?’”)
+   • Commit “v0.3: add semantic_search tool”
 
-5. (Optional) Step 4: Memory & Logging (v0.5)
-   • Add a “memory” component that stores conversation history  
+1. Step 4:
+   • ask before tool usage
+   • test default search
+   • log price
+   • add logfire
+
+5. (Optional) Step 4: use firelog (v0.5)
    • Add structured logging of tool calls + LLM messages  
    • Commit “v0.5: add memory & logging, tests”
 

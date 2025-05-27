@@ -1,6 +1,23 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+
+# Environment
 .env
-.venv/
-.vscode/ 
-.DS_Store
+.venv
+venv/
+ENV/
+env/
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Semantic search index
+index.json
+sample_docs/
+
+# Other
+*.log
+*.DS_Store

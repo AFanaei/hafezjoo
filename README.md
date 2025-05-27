@@ -9,11 +9,14 @@ llm-agent/
 ├── agent.py        # entry point
 ├── tools/          # directory for agent tools
 ├── README.md
-├── requirements.txt
 └── .gitignore
 ```
 
 ## Getting Started
+0. (if you have macOS)
+   ```bash
+   brew install python3.12
+   ```
 
 1. Install UV:
 
@@ -25,6 +28,12 @@ llm-agent/
 
    ```bash
    uv sync
+   ```
+
+   on macos
+
+   ```bash
+   uv sync --python /opt/homebrew/bin/python3.12
    ```
 
 2. Run the agent:

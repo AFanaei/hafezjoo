@@ -37,19 +37,20 @@ class ToolRegistry:
                 json_type_str = ""
 
                 annotation = param.annotation
-                assert (
-                    annotation is not inspect.Parameter.empty
-                    and hasattr(annotation, "__name__")
-                    and annotation.__name__ in _JSON_SCHEMA_TYPE_MAP
-                ), f"Unsupported type: {annotation.__name__}"
-
+                assert annotation is not inspect.Parameter.empty and hasattr(annotation, "__name__"), (
+                    f"Unsupported type: {annotation.__name__}"
+                )
+                if annotation.__name__ not in _JSON_SCHEMA_TYPE_MAP:
+                    if param.default is not inspect.Parameter.empty:
+                        continue
+                    else:
+                        raise ValueError(f"Unsupported type: {annotation.__name__}")
                 json_type_str = _JSON_SCHEMA_TYPE_MAP[annotation.__name__]
 
                 params[name] = {
                     "type": json_type_str,
                 }
-                if param.default is inspect.Parameter.empty:
-                    required.append(name)
+                required.append(name)
 
             res.append(
                 {

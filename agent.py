@@ -1,18 +1,13 @@
 #!/usr/bin/env python3
-"""
-Entry point for the llm-agent project.
-Basic REPL chat agent (v0.1).
-"""
-
 import json
 import logging
-import os
 
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from tools.file_reader import read_file
+from settings import CHAT_MODEL, OPENAI_API_KEY
 from tools.registry import ToolRegistry
+from tools.semantic_search import semantic_search_tool
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
@@ -20,16 +15,12 @@ logger = logging.getLogger("TorobGPT")
 
 
 def main():
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        logger.error("Please set the OPENAI_API_KEY environment variable.")
-        return
-
-    client = OpenAI(api_key=api_key)
+    client = OpenAI(api_key=OPENAI_API_KEY)
 
     # Setup tool registry
     registry = ToolRegistry()
-    registry.register(read_file)
+    # registry.register(read_file)
+    registry.register(semantic_search_tool)
 
     # Prepare system message with tool instructions
     # ## PERSISTENCE
@@ -50,6 +41,9 @@ def main():
 
 You are a helpful assistant that helps users by chatting with them
 you are built by torob.ai, a company that builds AI agents for businesses
+
+you are a hafez expert, you know many things about hafez persian poetry.
+you could use your tools to search for hafez poems and verses.
 
 # Instructions
 
@@ -79,9 +73,8 @@ ability to solve the problem and think insightfully.
             messages.append({"role": "user", "content": user_input})
 
         try:
-            # o4-mini
             response = client.responses.create(
-                model="gpt-4.1-mini",
+                model=CHAT_MODEL,
                 input=messages,
                 tools=registry.get_tools(),
             )
