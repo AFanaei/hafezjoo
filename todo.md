@@ -27,29 +27,20 @@ Your outline is solid — incrementally building an agent and using Git comm
    • Commit “v0.1: basic chat agent REPL”
 
 3. Step 2: Introduce a Tool interface (v0.2)
-   • Define a `Tool` protocol/abstract base class, e.g.:
+   • Define a `function` as a tool:
      ```python
-     class Tool(ABC):
-         name: str
-         def run(self, arg: str) -> str: ...
+     def get_weather(location:str)->int:
+         """
+         Get current temperature for a given location given as City and country e.g. Bogotá, Colombia
+         """
+         return 22
      ```  
+   • for the first tool we need a tool to read content of files in current workdir
    • Build a `ToolRegistry` that maps tool names → instances  
    • Refactor your chat loop to inspect the LLM’s JSON response for `{“tool”:..., “arg”:...}` calls, dispatch through the registry, then feed tool output back into the chat loop  
    • Commit “v0.2: add tool framework”
 
-4. Step 3: File‐reader tool (v0.3)
-   • Under `tools/file_reader.py`, implement:
-     ```python
-     class FileReaderTool(Tool):
-         name = "read_file"
-         def run(self, path: str) -> str:
-             return open(path).read()
-     ```  
-   • In `agent.py`, register `FileReaderTool()`  
-   • Demonstrate: user says “read_file:/path/to/foo.txt” → agent returns file contents  
-   • Commit “v0.3: add read_file tool”
-
-5. Step 4: Semantic‐search tool (v0.4)
+4. Step 3: Semantic‐search tool (v0.4)
    • Add dependencies: `sentence-transformers`, `faiss-cpu` (or use OpenAI Embeddings + simple cosine)  
    • Under `tools/semantic_search.py`, build:
      1. An indexing script that walks a directory, embeds each file/chunk, and stores vectors  
@@ -58,13 +49,12 @@ Your outline is solid — incrementally building an agent and using Git comm
    • Show an example query (“semantic_search:‘how do I initialize the agent?’”)  
    • Commit “v0.4: add semantic_search tool”
 
-6. (Optional) Step 5: Memory & Logging (v0.5)
+5. (Optional) Step 4: Memory & Logging (v0.5)
    • Add a “memory” component that stores conversation history  
    • Add structured logging of tool calls + LLM messages  
-   • Write basic unit tests for each tool  
    • Commit “v0.5: add memory & logging, tests”
 
-7. Polishing for a talk
+6. Polishing for a talk
    • Tag each release (`v0.1`, `v0.2`,…) so you can `git checkout v0.2` and show that exact code  
    • In your slides, show:
      – How the tool framework lets you “plug in” new capabilities  
