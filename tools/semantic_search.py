@@ -28,7 +28,7 @@ def semantic_search_tool(query: str, top_k: int = 3, index_instance: Index = Non
     find most top_k similar verses from hafez to the query
 
     Args:
-        query: The search query string.
+        query: The search query string. (should be in persian alphabet)
         top_k: The number of top verses
 
     Returns:
