@@ -5,6 +5,7 @@ description = "A simple AI agent framework that incrementally adds functionaliti
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "openai>=0.27.0",
+    "python-dotenv>=1.1.0",
     "ruff",
 ]
 
@@ -22,6 +23,7 @@ lint.ignore = [
     "E731", # Do not assign a `lambda` expression, use a `def`
     "B008", # Do not perform function call in argument defaults
     "B026", # Star-arg unpacking after a keyword argument is strongly discouraged
+    "T201", # print
 ]
 exclude = [
     ".git",

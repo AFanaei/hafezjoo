@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+- Replace `print` statements related to logging with `logging` calls (e.g., `logging.info`, `logging.error`).
+- Obtain module-specific loggers via `logger = logging.getLogger(__name__)`.
+
