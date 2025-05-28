@@ -21,3 +21,10 @@ CHAT_MODEL = "gpt-4.1-mini"
 
 DB_PATH = "semantic_index.db"
 TABLE_NAME = "embeddings_vec"
+
+LOGFIRE_API_KEY = os.environ.get("LOGFIRE_API_KEY")
+if LOGFIRE_API_KEY:
+    import logfire
+
+    logfire.configure(token=LOGFIRE_API_KEY, console=False)
+    logfire.instrument_openai()

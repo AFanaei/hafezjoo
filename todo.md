@@ -50,9 +50,6 @@ Your outline is solid — incrementally building an agent and using Git comm
    • Commit “v0.3: add semantic_search tool”
 
 1. Step 4:
-   • ask before tool usage
-   • test default search
-   • log price
    • add logfire
 
 5. (Optional) Step 4: use firelog (v0.5)
