@@ -38,3 +38,9 @@ LOGFIRE_API_KEY (optional)
    ```bash
    uv run python agent.py
    ``` 
+
+## TODO:
+- add more poetry.
+- use pydanticAi.
+- add user option to change model.
+- add html interface
