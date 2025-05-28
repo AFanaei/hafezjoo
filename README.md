@@ -2,16 +2,6 @@
 
 A simple AI agent framework that incrementally adds functionalities to interact with LLMs and external tools.
 
-## Project Structure
-
-```
-llm-agent/
-├── agent.py        # entry point
-├── tools/          # directory for agent tools
-├── README.md
-└── .gitignore
-```
-
 ## Getting Started
 0. (if you have macOS)
    ```bash
@@ -24,7 +14,7 @@ llm-agent/
    curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
 
-1. Install dependencies:
+2. Install dependencies:
 
    ```bash
    uv sync
@@ -36,7 +26,14 @@ llm-agent/
    uv sync --python /opt/homebrew/bin/python3.12
    ```
 
-2. Run the agent:
+3. Add openAi api key and optionaly logfire api key to Environment variables.
+
+```
+OPENAI_API_KEY
+LOGFIRE_API_KEY (optional)
+```
+
+4. Run the agent:
 
    ```bash
    uv run python agent.py
